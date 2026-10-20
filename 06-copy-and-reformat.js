@@ -7,22 +7,35 @@ creates a copy of obj with the following formatting applied:
 primitives or other objects with the same limitations (ie. no arrays, sets, etc.)
 */
 
-
 function copyFormatted(obj) {
-    // implement here
-    return null;
+  // implement here
+  const newObj = {};
+
+  for (let key in obj) {
+    if (typeof obj[key] == "string") {
+      newObj[key] = obj[key].toLowerCase();
+    } else if (typeof obj[key] == "number") {
+      newObj[key] = Number(obj[key].toFixed(2));
+    } else if (typeof obj[key] == "object") {
+      newObj[key] = copyFormatted(obj[key]);
+    } else {
+      newObj[key] = obj[key];
+    }
+  }
+
+  return newObj;
 }
 
 const data = {
-    name: "BiLLy bOb JoE",
-    monthlySalary: 100000 / 12,
-    team: "enGinEErinG",
-    stats: {
-        model: "Gemini",
-        tokensUsed: 3125917.667,
-    },
-    isActive: true,
-}
+  name: "BiLLy bOb JoE",
+  monthlySalary: 100000 / 12,
+  team: "enGinEErinG",
+  stats: {
+    model: "Gemini",
+    tokensUsed: 3125917.668908908098908908908097,
+  },
+  isActive: true,
+};
 
 const formattedData = copyFormatted(data);
 
